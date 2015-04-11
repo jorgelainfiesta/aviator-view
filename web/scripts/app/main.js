@@ -4,7 +4,7 @@ define(function(require){
   
   //Load tree
   var clouds = require("./clouds");
-  scene.plane.add(clouds);
+  //scene.plane.add(clouds);
   
   //Load variables
   var variables = require("./variables");
@@ -12,12 +12,10 @@ define(function(require){
   //Animate
   function animate() {
     requestAnimationFrame(animate);
-    
-    //Apply controls
-    transforms.applyAll(tree, opts.tree, memotree);
-    transforms.applyAll(house, opts.house, memohouse);
-    
-    //Apply transforms from variables
+		
+		// Render the scene.
+		scene.renderer.render(scene.scene, scene.camera);
+		//controls.update();
 
   }
   animate();
