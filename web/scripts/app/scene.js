@@ -1,4 +1,4 @@
-define(["OrbitControls", "./variables"], function(THREE, opts){
+define(["OrbitControls", "./opts"], function(THREE, opts){
   var scene, camera, renderer;
   //Set up scene
   scene = new THREE.Scene();
@@ -37,30 +37,17 @@ define(["OrbitControls", "./variables"], function(THREE, opts){
   
   //Set up ground
   
-	
   //Textures for grass
-  //var grassTexture	= THREE.ImageUtils.loadTexture(opts.grassURL);
-  //var material = new THREE.MeshPhongMaterial( {color: 0x99BC55, map: grassTexture} );
-	var material = new THREE.MeshBasicMaterial( { color: 0x7F7F79 } )
-  //grassTexture.wrapS = grassTexture.wrapT = THREE.RepeatWrapping;
-  //grassTexture.repeat.set(100, 100);
-  //grassTexture.anisotropy = 16;
-  
+  var material = new THREE.MeshPhongMaterial( {color: 0x99BC55} );
   var geometry = new THREE.PlaneBufferGeometry(2200, 2200);
   var plane = new THREE.Mesh( geometry, material );
   plane.rotation.x = -Math.PI/2; //Horizontal plane
-	//  plane.position.set(-10, -10, -300); //Move a little bit
-  scene.add( plane ); 
-	
+//  plane.position.set(-10, -10, -300); //Move a little bit
+  scene.add( plane );
   
   //Set up the sky
   geometry = new THREE.SphereGeometry (2000);
-  //var cloudTexture = THREE.ImageUtils.loadTexture(opts.cloudsURL);
-  //cloudTexture.wrapS = cloudTexture.wrapT = THREE.RepeatWrapping;
-  //cloudTexture.repeat.set(10, 10);
-  //cloudTexture.anisotropy = 16;
-	var material = new THREE.MeshBasicMaterial( { color: 0x7F7F79 } )
-  //material = new THREE.MeshPhongMaterial({color: 0xB8EEFF, side: THREE.DoubleSide, map: cloudTexture} );
+  material = new THREE.MeshPhongMaterial({color: 0xB8EEFF} );
   var sky = new THREE.Mesh( geometry, material );
   scene.add( sky );
     

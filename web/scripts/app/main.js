@@ -12,10 +12,15 @@ define(function(require){
   //Animate
   function animate() {
     requestAnimationFrame(animate);
-		
-		// Render the scene.
+    
+    //Apply controls
+    //transforms.applyAll(tree, opts.tree, memotree);
+    //transforms.applyAll(house, opts.house, memohouse);
+    
+    //Apply transforms from variables
 		scene.renderer.render(scene.scene, scene.camera);
-		//controls.update();
+		scene.controls.update();
+		
 
   }
   animate();
