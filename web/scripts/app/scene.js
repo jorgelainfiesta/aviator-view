@@ -49,6 +49,7 @@ define(["OrbitControls", "./opts"], function(THREE, opts){
   geometry = new THREE.SphereGeometry (2000);
   material = new THREE.MeshPhongMaterial({color: 0xB8EEFF} );
   var sky = new THREE.Mesh( geometry, material );
+	sky.material.side = THREE.DoubleSide;
   scene.add( sky );
     
   var controls = new THREE.OrbitControls(camera, renderer.domElement);

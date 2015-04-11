@@ -8,7 +8,9 @@ define(function(require){
   
   //Load variables
   var variables = require("./variables");
-  
+ 
+	scene.scene.add(clouds.mesh);
+	
   //Animate
   function animate() {
     requestAnimationFrame(animate);
