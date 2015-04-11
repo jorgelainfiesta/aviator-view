@@ -5,7 +5,8 @@ define(["OrbitControls", "./materials", "./opts"], function(THREE, materials, op
 	texture.magFilter = THREE.LinearMipMapLinearFilter;
 	texture.minFilter = THREE.LinearMipMapLinearFilter;
 
-	var fog = new THREE.Fog( 0x4584b4, - 100, 3000 );
+	var fog = new THREE.Fog( "rgb(100,100,100)", -1000, 3000 );
+	
 	var material = new THREE.ShaderMaterial( {
 		uniforms: {
 
@@ -23,13 +24,13 @@ define(["OrbitControls", "./materials", "./opts"], function(THREE, materials, op
 
 	} );
 
-	var plane = new THREE.Mesh( new THREE.PlaneGeometry( 64, 64 ) );
+	var plane = new THREE.Mesh( new THREE.PlaneGeometry( 60, 60 ) );
 
 	
 	for ( var i = -1000; i < 1000; i++ ) {
 
 		plane.position.x = Math.random() * 1000 - 500;
-		plane.position.y = - Math.random() * Math.random() * 200 - 15;
+		plane.position.y = - Math.random() * Math.random() * 100 - 15;
 		plane.position.z = i+i;
 		plane.rotation.z = Math.random() * Math.PI;
 		plane.scale.x = plane.scale.y = Math.random() * Math.random() * 1.5 + 0.5;
