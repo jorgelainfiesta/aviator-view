@@ -8,24 +8,26 @@ define(function(require){
   
   //Load variables
   var variables = require("./variables");
+  
+  var memcloud = '';
+  
  
 	scene.scene.add(clouds.mesh);
 	
   //Animate
   function animate() {
     requestAnimationFrame(animate);
-    
-    //Apply controls
-    //transforms.applyAll(tree, opts.tree, memotree);
-    //transforms.applyAll(house, opts.house, memohouse);
-    
-    //Apply transforms from variables
-		scene.renderer.render(scene.scene, scene.camera);
-		scene.controls.update();
-		
+    //Do frame rendering
+    scene.renderer.render(scene.scene, scene.camera);
+    scene.controls.update();
+    if(variables.clouds != memcloud){
+      console.log(variables.clouds);
+      memcloud = variables.clouds;
+    }
 
   }
   animate();
   
+  //Insert into body
   document.body.appendChild( scene.renderer.domElement );
 });
