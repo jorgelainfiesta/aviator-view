@@ -30,11 +30,13 @@ define(['./opts', './utils', 'color'], function(opts, utils, Color){
   socket.onmessage = function(evt) {
       console.log('socket receive');
       console.log(evt.data);
+      alert("FUCK");
   }
 
   // On Socket Close
   socket.onclose = function() {
       console.log('socket closed');
+    alert("DAMN!");
   }
 
   // On Error
@@ -45,7 +47,7 @@ define(['./opts', './utils', 'color'], function(opts, utils, Color){
   // On Connection Establish
   socket.onopen = function(evt) {
       console.log('socket open');
-
+      alert("FUQ!");
       // Send a Message!
       socket.send('hello world!');
   }
