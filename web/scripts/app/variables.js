@@ -10,13 +10,21 @@ define(['./opts', './utils', 'color'], function(opts, utils, Color){
     skyTop: skyTop.toString(),
     skyBottom: skyBottom.toString(),
     clouds: 0.1,
-    humidity: 0,
+    humidity: 0.5,
     rain: 10,
     sunx: 10,
     suny: 10,
-    windspeed: 0.1,
+    windspeed: 0.2,
     ambientcolor: skyBottom.lightenByRatio(0.4).toString(),
-    change: true
+    change: true,
+		AircraftID: 'D1',
+		AircraftType: '3R',
+		Latitude: 15.8990,
+		Longitude: 14.009, 
+		Altitude: 15000,
+		Speed: 34,
+		City: 'Guatemala City',
+		Temperature: 89
   }
   console.log(vars);
   
