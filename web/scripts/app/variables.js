@@ -1,14 +1,27 @@
-define(['./opts'], function(opts){
+define(['./opts', './utils', 'color'], function(opts, utils, Color){
+  
   //We'll use websockets here to construct and object
+  alert("HOLA");
+  
+  //Computed properties
+  var skycolor = Color("#fd951c");
+  
   var vars = {
-    skycolor: "blue",
+    skycolor: skycolor.toString(),
     clouds: 10,
     humidity: 10,
     rain: 10,
     sunx: 10,
-    suny: 10
+    suny: 10,
+    windspeed: 10,
+    ambientcolor: skycolor.lightenByRatio(0.8).toString(),
+    change: true
   }
-  setInterval(function () {vars.clouds += 10}, 3000);
+  console.log(vars);
+  
+//  setInterval(function () {
+//    
+//  }, 3000);
   
   var socket = new WebSocket(opts.socketurl);
 
@@ -41,6 +54,7 @@ define(['./opts'], function(opts){
       console.log('socket send');
       console.log(evt);
   }
+  
   
   return vars;
 });

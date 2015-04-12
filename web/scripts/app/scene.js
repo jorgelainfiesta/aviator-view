@@ -18,22 +18,26 @@ define(["OrbitControls", "./opts"], function(THREE, opts){
 
   
   //Set up lights
+  var lights = {
+    ambient: new THREE.AmbientLight(0x020202),
+    front: new THREE.DirectionalLight('white', 0.3),
+    back: new THREE.DirectionalLight('white', 0.2),
+    hemisphere: new THREE.HemisphereLight(0xE3F4FF, 0xBCE1F9, 1.001)
+  }
+  //Add ambient
+  scene.add(lights.ambient);
   
-  // add a ambient light
-  var light	= new THREE.AmbientLight( 0x020202 )
-  scene.add( light )
-  // add a light in front
-  light	= new THREE.DirectionalLight('white', 0.3)
-  light.position.set(5, 5, 20)
-  scene.add( light )
-  // add a light behind
-  light	= new THREE.DirectionalLight('white', 0.2)
-  light.position.set(0, 10, -20)
-  scene.add( light )
+  //Add a light in front
+  lights.front.position.set(5, 5, 20);
+  scene.add(lights.front);
+  
+  // add a light back
+  lights.back.position.set(0, 10, -20)
+  scene.add(lights.back);
+  
   // add a light in sky
-  light = new THREE.HemisphereLight(0xE3F4FF, 0xBCE1F9, 1.001);
-  light.position.set(0,500,500);
-  scene.add(light);
+  lights.hemisphere.position.set(0,500,500);
+  scene.add(lights.hemisphere);
   
   //Set up ground
   
@@ -54,5 +58,5 @@ define(["OrbitControls", "./opts"], function(THREE, opts){
     
   var controls = new THREE.OrbitControls(camera, renderer.domElement);
   
-  return {"renderer": renderer, "camera" : camera, "scene" : scene, "controls" : controls, "plane" : plane, "sky" : sky};
+  return {"renderer": renderer, "camera" : camera, "scene" : scene, "controls" : controls, "plane" : plane, "sky" : sky, "lights" : lights};
 });
