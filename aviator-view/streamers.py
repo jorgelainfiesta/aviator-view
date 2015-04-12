@@ -2,6 +2,8 @@
 # wow, so descriptive
 
 import time
+from  pymongo import MongoClient
+
 from models import Flight
 
 class GenericStreamer:
@@ -13,24 +15,32 @@ class GenericStreamer:
         self.playing = False
         
     def start(self):
-        self.playing = True
-        while self.playing:
+				client = MongoClient()
+				db = client.aviator
+				self.playing = True
+				flights = db.flights.find({"ac_id":"HAL348"})
+				
+				
+				 
+				i = 0
+				while self.playing and i<flights.count():
             # somehow retrieve an object with information from url
-            dum_lat = 211500
-            obj = {
-                'ac_id': 'HAL348',
-                'ac_type': 'B712',
-                'lat': dum_lat,
-                'long': 1584700,
-                'speed': 260,
-                'altitude': 14,
-                'heading': 117,
-                'center': 'OAO',
-                'sector': 'ZHNHN'
-            }
-            dum_lat += 100
-            self.action(obj)
-            time.sleep(self.interval)
+						obj = flights[i]
+						# obj = {
+								# 'ac_id': 'HAL348',
+								# 'ac_type': 'B712',
+								# 'lat': dum_lat,
+								# 'long': 1584700,
+								# 'speed': 260,
+								# 'altitude': 14,
+								# 'heading': 117,
+								# 'center': 'OAO',
+								# 'sector': 'ZHNHN'
+						# }
+						# dum_lat += 100
+						self.action(obj)
+						time.sleep(self.interval)
+						i+=1
             
     def stop(self):
         self.playing = False

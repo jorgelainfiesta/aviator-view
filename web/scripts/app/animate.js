@@ -6,6 +6,7 @@ define(function(require){
 //  var clouds = require("./clouds");
   //scene.plane.add(clouds);
 //	scene.scene.add(clouds.mesh);
+// scene.scene.add(clouds.mesh);
   
   //Load variables
   var variables = require("./variables");
