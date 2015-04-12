@@ -1,0 +1,10 @@
+diff a/aviator-view/streamers.py b/aviator-view/streamers.py	(rejected hunks)
+@@ -2,6 +2,8 @@
+ # wow, so descriptive
+ 
+ import time
++from  pymongo import MongoClient
++
+ from models import Flight
+ 
+ class GenericStreamer:

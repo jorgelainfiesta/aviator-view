@@ -1,57 +1,51 @@
 """Streamers of data"""
 # wow, so descriptive
 
-import time
+import time, urllib, json
+from  pymongo import MongoClient
 from models import Flight
-import urllib, json
+from web.dummy_socket import WSHandler
 
 class GenericStreamer:
     """To stream data from a specific url every specified time"""
     
-    def __init__(self, interval):
+    def __init__(self, url, interval):
+        self.url = url
         self.interval = interval
         self.playing = False
         
     def start(self):
-        self.playing = True
-        dum_lat = 211500
-        while self.playing:
+				client = MongoClient()
+				db = client.aviator
+				self.playing = True
+				flights = db.flights.find({"ac_id":"HAL348"})
+				
+				
+				 
+				i = 0
+				while self.playing and i<flights.count():
             # somehow retrieve an object with information from url
-            obj = {
-                'ac_id': 'HAL348',
-                'ac_type': 'B712',
-                'lat': dum_lat,
-                'long': 1584700,
-                'speed': 260,
-                'altitude': 14,
-                'heading': 117,
-                'center': 'OAO',
-                'sector': 'ZHNHN'
-            }
-            dum_lat += 100
-            self.action(obj)
-            time.sleep(self.interval)
+						obj = flights[i]
+						# obj = {
+								# 'ac_id': 'HAL348',
+								# 'ac_type': 'B712',
+								# 'lat': dum_lat,
+								# 'long': 1584700,
+								# 'speed': 260,
+								# 'altitude': 14,
+								# 'heading': 117,
+								# 'center': 'OAO',
+								# 'sector': 'ZHNHN'
+						# }
+						# dum_lat += 100
+						self.action(obj)
+						time.sleep(self.interval)
+						i+=1
             
     def stop(self):
         self.playing = False
-        
-class DummyFlightStreamer(GenericStreamer):
-    """A dummy class to simulate the flight tracking stream"""
-    
-    def action(self, obj):
-        flight = Flight()
-        flight.aircraft_id = obj['ac_id']
-        flight.aircraft_type = obj['ac_type']
-        flight.latitude = obj['lat']
-        flight.longitude = obj['long']
-        flight.speed = obj['speed']
-        flight.altitud = obj['altitude']
-        flight.heading = obj['heading']
-        flight.center = obj['center']
-        flight.sector = obj['sector']
-        print(flight.latitude)
-        
 
+        
 def get_sky_front_color(time, sunrise, sunset):
     daylight = sunset - sunrise
     time = time - sunrise
@@ -130,4 +124,27 @@ class MeteorologicalData:
         meteoro['sky_back_color'] = get_sky_back_color(data.get('dt'), sys.get('sunrise'), sys.get('sunset')) if sys else None
         meteoro['lat'] = latitude
         meteoro['long'] = longitude
-        return meteoro
+        return meteoro        
+        
+        
+        
+        
+md = MeteorologicalData()
+ws = WSHandler()
+        
+class DummyFlightStreamer(GenericStreamer):
+    """A dummy class to simulate the flight tracking stream"""
+    
+    def action(self, obj):
+        flight = Flight()
+        flight.aircraft_id = obj['ac_id']
+        flight.aircraft_type = obj['ac_type']
+        flight.latitude = str(obj['lat'])[:-4] + '.' + str(obj['lat'])[-4:]
+        flight.longitude = str(obj['long'])[:-4] + '.' + str(obj['long'])[-4:]
+        flight.speed = obj['speed']
+        flight.altitud = obj['altitude']
+        flight.heading = obj['heading']
+        flight.center = obj['center']
+        flight.sector = obj['sector']
+        
+        ws.send(md.get_data(flight.latitude, flight.longitude))
