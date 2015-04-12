@@ -3,17 +3,19 @@ define(['./opts', './utils', 'color'], function(opts, utils, Color){
   //We'll use websockets here to construct and object
   
   //Computed properties
-  var skycolor = Color("#fd951c");
+  var skyTop = Color("#a61cfd");
+  var skyBottom = Color("#fd951c");
   
   var vars = {
-    skycolor: skycolor.toString(),
+    skyTop: skyTop.toString(),
+    skyBottom: skyBottom.toString(),
     clouds: 10,
     humidity: 10,
     rain: 10,
     sunx: 10,
     suny: 10,
     windspeed: 10,
-    ambientcolor: skycolor.lightenByRatio(0.4).toString(),
+    ambientcolor: skyBottom.lightenByRatio(0.4).toString(),
     change: true
   }
   console.log(vars);

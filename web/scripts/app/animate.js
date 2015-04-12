@@ -3,9 +3,9 @@ define(function(require){
   var scene = require("./scene");
   
   //Load clouds
-  var clouds = require("./clouds");
+//  var clouds = require("./clouds");
   //scene.plane.add(clouds);
-	scene.scene.add(clouds.mesh);
+//	scene.scene.add(clouds.mesh);
   
   //Load variables
   var variables = require("./variables");
@@ -23,9 +23,9 @@ define(function(require){
     //Apply updates when needed
     if(variables.change){
       //Change sky colors
-      scene.lights.hemisphere.color = new THREE.Color(variables.ambientcolor);
-      scene.sky.material.color = new THREE.Color(variables.skycolor);
-      scene.fog.color = new THREE.Color(variables.ambientcolor);;
+      scene.lights.hemisphere.color = new THREE.Color(variables.skyBottom);
+      scene.sky.material.color = new THREE.Color(variables.skyTop);
+      scene.fog.color = new THREE.Color(variables.skyBottom);;
       //Set change back to false
       variables.change = false;
     }
