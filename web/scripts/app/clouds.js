@@ -27,24 +27,25 @@ define(["OrbitControls", "./materials", "./opts", "./animate"], function(THREE, 
 	
 
 	
-	for ( var i = -1000; i < 1000; i++ ) {
+	for ( var i = -5000; i < 600; i++ ) {
 		
 		var plane = new THREE.Mesh( new THREE.PlaneGeometry( 60, 60 ) );
 
-		plane.position.x = Math.random() * 1000 - 500;
+		plane.position.x = Math.random() * 3000 - 1500;
 		plane.position.y = - Math.random() * Math.random() * 100 - 15;
-		plane.position.z = i;
+		plane.position.z = Math.random()*i;
 		plane.rotation.z = Math.random() * Math.PI;
 		plane.scale.x = plane.scale.y = Math.random() * Math.random() * 1.5 + 0.5;
 
-		//THREE.GeometryUtils.merge( geometry, plane );
+		THREE.GeometryUtils.merge( geometry, plane );
 		
-		geometry.merge(plane.geometry, plane.matrix);
+		//geometry.merge(plane.geometry, plane.matrix);
 
 	}
 
 	mesh = new THREE.Mesh( geometry, material );
 	
+	//mesh.position.z = -8000;
 
 	return {"mesh": mesh};
   

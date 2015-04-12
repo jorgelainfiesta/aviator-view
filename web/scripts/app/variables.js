@@ -14,7 +14,7 @@ define(['./opts', './utils', 'color'], function(opts, utils, Color){
     rain: 10,
     sunx: 10,
     suny: 10,
-    windspeed: 10,
+    windspeed: 0.2,
     ambientcolor: skyBottom.lightenByRatio(0.4).toString(),
     change: true
   }

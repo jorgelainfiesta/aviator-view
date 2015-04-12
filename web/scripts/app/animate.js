@@ -3,9 +3,9 @@ define(function(require){
   var scene = require("./scene");
   
   //Load clouds
-//  var clouds = require("./clouds");
+  var clouds = require("./clouds");
   //scene.plane.add(clouds);
-//	scene.scene.add(clouds.mesh);
+	scene.scene.add(clouds.mesh);
   
   //Load variables
   var variables = require("./variables");
@@ -30,7 +30,9 @@ define(function(require){
       variables.change = false;
     }
 		
-		//position = ( ( Date.now() - start_time ) * 0.03 ) % 8000;
+		
+		clouds.mesh.position.z += variables.windspeed;
+		
 
     
   }
