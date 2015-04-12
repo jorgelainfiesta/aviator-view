@@ -3,14 +3,14 @@ define(['./opts', './utils', 'color'], function(opts, utils, Color){
   //We'll use websockets here to construct and object
   
   //Computed properties
-  var skyTop = Color("#a61cfd");
-  var skyBottom = Color("#fd951c");
+  var skyTop = Color("#0a0a0e");
+  var skyBottom = Color("#583f54");
   
   var vars = {
     skyTop: skyTop.toString(),
     skyBottom: skyBottom.toString(),
-    clouds: 0.1,
-    humidity: 0.5,
+    clouds: 0.2,
+    humidity: 0.1,
     rain: 10,
     sunx: 10,
     suny: 10,
@@ -19,8 +19,8 @@ define(['./opts', './utils', 'color'], function(opts, utils, Color){
     change: true,
 		AircraftID: 'D1',
 		AircraftType: '3R',
-		Latitude: 15.8990,
-		Longitude: 14.009, 
+		Latitude: 14.5859987,
+		Longitude: -90.570235, 
 		Altitude: 15000,
 		Speed: 34,
 		City: 'Guatemala City',
@@ -38,7 +38,7 @@ define(['./opts', './utils', 'color'], function(opts, utils, Color){
   socket.onmessage = function(evt) {
       console.log('socket receive');
       console.log(evt.data);
-      alert("FUCK");
+      
   }
 
   // On Socket Close
@@ -55,7 +55,7 @@ define(['./opts', './utils', 'color'], function(opts, utils, Color){
   // On Connection Establish
   socket.onopen = function(evt) {
       console.log('socket open');
-      alert("FUQ!");
+     
       // Send a Message!
       socket.send('hello world!');
   }

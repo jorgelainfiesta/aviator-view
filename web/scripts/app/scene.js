@@ -1,4 +1,4 @@
-define(["OrbitControls", "./opts"], function(THREE, opts){
+define(["OrbitControls", "./opts", "./variables"], function(THREE, opts, vars){
   var scene, camera, renderer;
   //Set up scene
   scene = new THREE.Scene();
@@ -10,7 +10,7 @@ define(["OrbitControls", "./opts"], function(THREE, opts){
   
   //Set up camera
   camera = new THREE.PerspectiveCamera(45, (opts.swidth / opts.sheight), opts.near, opts.far*1.5);
-  camera.position.set(0, 10, 800);
+  camera.position.set(0, 15, 400);
   scene.add(camera);
   
   //Set up fog
@@ -41,17 +41,22 @@ define(["OrbitControls", "./opts"], function(THREE, opts){
   scene.add(lights.hemisphere);
   
   //Set up ground
-  
-  //Textures for grass
-  var material = new THREE.MeshPhongMaterial( {color: 0x99BC55} );
-  var geometry = new THREE.PlaneBufferGeometry(2200, 2200);
+//  var material = new THREE.MeshPhongMaterial( {color: 0x99BC55} );
+	
+	var url = "http://maps.googleapis.com/maps/api/staticmap?zoom=9&size=1024x1024&scale=2&maptype=satellite&center="+vars.Latitude+","+vars.Longitude;
+	
+	var google = THREE.ImageUtils.loadTexture( url );
+//	var google = THREE.ImageUtils.loadTexture( "././images/map.png" );
+	var material = new THREE.MeshLambertMaterial({ map : google });
+  var geometry = new THREE.PlaneBufferGeometry(1024, 1024);
   var plane = new THREE.Mesh( geometry, material );
   plane.rotation.x = -Math.PI/2; //Horizontal plane
+	plane.position.y -= 20;
 //  plane.position.set(-10, -10, -300); //Move a little bit
   scene.add( plane );
   
   //Set up the sky
-  geometry = new THREE.SphereGeometry (2000);
+  geometry = new THREE.SphereGeometry (800);
   material = new THREE.MeshPhongMaterial({color: 0xB8EEFF} );
   var sky = new THREE.Mesh( geometry, material );
 	sky.material.side = THREE.DoubleSide;
