@@ -26,7 +26,6 @@ define(["OrbitControls", "./materials", "./opts", "./animate", "./variables"], f
 		transparent: true
 
 	} );
-
 	
 	for ( var i = -5000; i < 800; i++ ) {
 		

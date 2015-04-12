@@ -6,6 +6,9 @@ define(function(require){
   //Run animate
   animation.animate;
   
+  //Load GUI
+  var gui = require("./gui");
+  
   //Insert into body
   document.body.appendChild( animation.renderer.domElement);
 });
