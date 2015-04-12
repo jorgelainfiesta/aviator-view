@@ -5,6 +5,7 @@ define(function(require){
   //Load clouds
   var clouds = require("./clouds");
   //scene.plane.add(clouds);
+	scene.scene.add(clouds.mesh);
   
   //Load variables
   var variables = require("./variables");
@@ -27,6 +28,9 @@ define(function(require){
       //Set change back to false
       variables.change = false;
     }
+		
+		//position = ( ( Date.now() - start_time ) * 0.03 ) % 8000;
+
     
   }
   return {"animate" : animate(), "renderer" : scene.renderer};

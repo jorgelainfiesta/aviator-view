@@ -1,11 +1,11 @@
-define(["OrbitControls", "./materials", "./opts"], function(THREE, materials, opts){
+define(["OrbitControls", "./materials", "./opts", "./animate"], function(THREE, materials, opts, animate){
   
 	var geometry = new THREE.Geometry();
-	var texture = THREE.ImageUtils.loadTexture(opts.cloudURL , null );
+	var texture = THREE.ImageUtils.loadTexture(opts.cloudURL , null, animate.animate);
 	texture.magFilter = THREE.LinearMipMapLinearFilter;
 	texture.minFilter = THREE.LinearMipMapLinearFilter;
 
-	var fog = new THREE.Fog( "rgb(100,100,100)", -1000, 3000 );
+	var fog = new THREE.Fog( "rgb(100,100,100)", -1000, 4000 );
 	
 	var material = new THREE.ShaderMaterial( {
 		uniforms: {
@@ -31,7 +31,7 @@ define(["OrbitControls", "./materials", "./opts"], function(THREE, materials, op
 
 		plane.position.x = Math.random() * 1000 - 500;
 		plane.position.y = - Math.random() * Math.random() * 100 - 15;
-		plane.position.z = i+i;
+		plane.position.z = i;
 		plane.rotation.z = Math.random() * Math.PI;
 		plane.scale.x = plane.scale.y = Math.random() * Math.random() * 1.5 + 0.5;
 
@@ -39,12 +39,10 @@ define(["OrbitControls", "./materials", "./opts"], function(THREE, materials, op
 
 	}
 
-	mesh = new THREE.Mesh( geometry, material );	
+	mesh = new THREE.Mesh( geometry, material );
+	
 
 	return {"mesh": mesh};
   
 });
-
-	//position = ( ( Date.now() - start_time ) * 0.03 ) % 8000;
-
 
