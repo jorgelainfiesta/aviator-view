@@ -9,8 +9,8 @@ define(['./opts', './utils', 'color'], function(opts, utils, Color){
   var vars = {
     skyTop: skyTop.toString(),
     skyBottom: skyBottom.toString(),
-    clouds: 10,
-    humidity: 10,
+    clouds: 0.1,
+    humidity: 1,
     rain: 10,
     sunx: 10,
     suny: 10,
