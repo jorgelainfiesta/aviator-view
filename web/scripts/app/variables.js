@@ -1,7 +1,6 @@
 define(['./opts', './utils', 'color'], function(opts, utils, Color){
   
   //We'll use websockets here to construct and object
-  alert("HOLA");
   
   //Computed properties
   var skycolor = Color("#fd951c");
@@ -14,7 +13,7 @@ define(['./opts', './utils', 'color'], function(opts, utils, Color){
     sunx: 10,
     suny: 10,
     windspeed: 10,
-    ambientcolor: skycolor.lightenByRatio(0.8).toString(),
+    ambientcolor: skycolor.lightenByRatio(0.4).toString(),
     change: true
   }
   console.log(vars);

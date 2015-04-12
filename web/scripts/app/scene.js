@@ -5,7 +5,7 @@ define(["OrbitControls", "./opts"], function(THREE, opts){
   
   //Set up renderer
   renderer = new THREE.WebGLRenderer();
-  renderer.setPixelRatio( window.devicePixelRatio );
+  renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(opts.swidth, opts.sheight);
   
   //Set up camera
@@ -14,7 +14,8 @@ define(["OrbitControls", "./opts"], function(THREE, opts){
   scene.add(camera);
   
   //Set up fog
-  scene.fog = new THREE.Fog( 0xd0eaff, 1, opts.far*.70);
+  var fog =  new THREE.Fog( 0xd0eaff, 1, opts.far*.70);
+  scene.fog = fog;
 
   
   //Set up lights
@@ -36,7 +37,7 @@ define(["OrbitControls", "./opts"], function(THREE, opts){
   scene.add(lights.back);
   
   // add a light in sky
-  lights.hemisphere.position.set(0,500,500);
+  lights.hemisphere.position.set(0, 500, 500);
   scene.add(lights.hemisphere);
   
   //Set up ground
@@ -58,5 +59,5 @@ define(["OrbitControls", "./opts"], function(THREE, opts){
     
   var controls = new THREE.OrbitControls(camera, renderer.domElement);
   
-  return {"renderer": renderer, "camera" : camera, "scene" : scene, "controls" : controls, "plane" : plane, "sky" : sky, "lights" : lights};
+  return {"renderer": renderer, "camera" : camera, "scene" : scene, "controls" : controls, "plane" : plane, "sky" : sky, "lights" : lights, "fog": fog};
 });

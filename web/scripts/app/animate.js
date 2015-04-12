@@ -23,7 +23,8 @@ define(function(require){
     if(variables.change){
       //Change sky colors
       scene.lights.hemisphere.color = new THREE.Color(variables.ambientcolor);
-      
+      scene.sky.material.color = new THREE.Color(variables.skycolor);
+      scene.fog.color = new THREE.Color(variables.ambientcolor);;
       //Set change back to false
       variables.change = false;
     }
