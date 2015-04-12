@@ -10,11 +10,11 @@ define(['./opts', './utils', 'color'], function(opts, utils, Color){
     skyTop: skyTop.toString(),
     skyBottom: skyBottom.toString(),
     clouds: 0.1,
-    humidity: 1,
+    humidity: 0,
     rain: 10,
     sunx: 10,
     suny: 10,
-    windspeed: 0.2,
+    windspeed: 0.1,
     ambientcolor: skyBottom.lightenByRatio(0.4).toString(),
     change: true
   }

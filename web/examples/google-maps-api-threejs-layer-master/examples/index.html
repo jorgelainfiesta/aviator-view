@@ -1,0 +1,100 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Three.js Layer - Google Maps API</title>
+    <style>
+      html, body, #map-div {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
+    </style>
+
+    <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script src="data.js"></script>
+    <script src="styles.js"></script>
+    <script src="../lib/detector.js"></script>
+    <script src="../lib/dat.gui.js"></script>
+    <script src="../lib/three.js"></script>
+    <script src="../threejs-layer.js"></script>
+
+    <script>
+
+      function init() {
+
+        var container = document.getElementById('map-div');
+
+        var map = new google.maps.Map(container, {
+          zoom: 3,
+          mapTypeControl: false,
+          center: new google.maps.LatLng(10, 0),
+          mapTypeId: google.maps.MapTypeId.SATELLITE,
+          styles: styles
+        });
+
+        // if you add renderertype:'Canvas' to the options for ThreejsLayer, you can force the usage of CanvasRenderer
+        new ThreejsLayer({ map: map }, function(layer){
+
+            var geometry = new THREE.Geometry(),
+              texture = new THREE.Texture(generateSprite()),
+              material, particles;
+
+            photos.forEach(function(photo){
+              var location = new google.maps.LatLng(photo[0], photo[1]),
+                vertex = layer.fromLatLngToVertex(location);
+
+              geometry.vertices.push( vertex );
+            });
+
+            texture.needsUpdate = true;
+
+            material = new THREE.PointCloudMaterial({
+              size: 20,
+              map: texture,
+              opacity: 0.3,
+              blending: THREE.AdditiveBlending,
+              depthTest: false,
+              transparent: true
+            });
+
+            particles = new THREE.PointCloud( geometry, material );
+         
+          layer.add( particles );
+
+          function update(){
+            if (layer.renderertype=='Canvas' || !Detector.webgl)  material.map = new THREE.Texture(generateSprite(material.size));
+            layer.render();
+          }
+
+       
+
+        });
+      }
+			
+			
+
+      function generateSprite(size) {
+
+        var canvas = document.createElement('canvas'),
+          context = canvas.getContext('2d'),
+          gradient;
+        size = size || 20;
+        canvas.width = size;
+        canvas.height = size;
+
+       
+
+        return canvas;
+      }
+
+      document.addEventListener('DOMContentLoaded', init, false);
+    </script>
+
+  </head>
+
+  <body>
+    <div id="map-div"></div>
+  </body>
+</html>
