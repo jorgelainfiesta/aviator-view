@@ -1,7 +1,7 @@
 define(["OrbitControls", "./materials", "./opts", "./animate"], function(THREE, materials, opts, animate){
   
 	var geometry = new THREE.Geometry();
-	var texture = THREE.ImageUtils.loadTexture(opts.cloudURL , null, animate.animate);
+	var texture = THREE.ImageUtils.loadTexture(opts.cloudURL , null);
 	texture.magFilter = THREE.LinearMipMapLinearFilter;
 	texture.minFilter = THREE.LinearMipMapLinearFilter;
 
@@ -24,10 +24,12 @@ define(["OrbitControls", "./materials", "./opts", "./animate"], function(THREE, 
 
 	} );
 
-	var plane = new THREE.Mesh( new THREE.PlaneGeometry( 60, 60 ) );
+	
 
 	
 	for ( var i = -1000; i < 1000; i++ ) {
+		
+		var plane = new THREE.Mesh( new THREE.PlaneGeometry( 60, 60 ) );
 
 		plane.position.x = Math.random() * 1000 - 500;
 		plane.position.y = - Math.random() * Math.random() * 100 - 15;
@@ -35,7 +37,9 @@ define(["OrbitControls", "./materials", "./opts", "./animate"], function(THREE, 
 		plane.rotation.z = Math.random() * Math.PI;
 		plane.scale.x = plane.scale.y = Math.random() * Math.random() * 1.5 + 0.5;
 
-		THREE.GeometryUtils.merge( geometry, plane );
+		//THREE.GeometryUtils.merge( geometry, plane );
+		
+		geometry.merge(plane.geometry, plane.matrix);
 
 	}
 
@@ -45,4 +49,3 @@ define(["OrbitControls", "./materials", "./opts", "./animate"], function(THREE, 
 	return {"mesh": mesh};
   
 });
-
