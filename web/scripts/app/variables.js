@@ -1,27 +1,61 @@
-define(function(){
-  
-  //Hola
-  var ws = new WebSocket("ws://localhost:9999/ws");  //change example.com with your host
-  ws.onopen = function(evt) {
-    console.log("Connected:");
-    console.log(evt);
-  };
-
-  ws.onmessage = function(evt) {
-    var newMessage = document.createElement('p');
-    newMessage.textContent = "Server: " + evt.data;
-    console.log(newMessage);
-  };
-
-  ws.onclose = function(evt) {
-    alert ("Connection closed");
-  };
+define(['./opts', './utils', 'color'], function(opts, utils, Color){
   
   //We'll use websockets here to construct and object
-  var data = {
-    hola: "hola",
-    adios: "adios"
+  
+  //Computed properties
+  var skyTop = Color("#a61cfd");
+  var skyBottom = Color("#fd951c");
+  
+  var vars = {
+    skyTop: skyTop.toString(),
+    skyBottom: skyBottom.toString(),
+    clouds: 10,
+    humidity: 10,
+    rain: 10,
+    sunx: 10,
+    suny: 10,
+    windspeed: 0.2,
+    ambientcolor: skyBottom.lightenByRatio(0.4).toString(),
+    change: true
+  }
+  console.log(vars);
+  
+//  setInterval(function () {
+//    
+//  }, 3000);
+  
+  var socket = new WebSocket(opts.socketurl);
+
+  // On Message Receive
+  socket.onmessage = function(evt) {
+      console.log('socket receive');
+      console.log(evt.data);
+  }
+
+  // On Socket Close
+  socket.onclose = function() {
+      console.log('socket closed');
+  }
+
+  // On Error
+  socket.onerror = function() {
+      console.log('socket error');
+  }
+
+  // On Connection Establish
+  socket.onopen = function(evt) {
+      console.log('socket open');
+
+      // Send a Message!
+      socket.send('hello world!');
+  }
+
+  // On Send Complete
+  socket.onsend = function(evt) {
+      console.log('socket send');
+      console.log(evt);
   }
   
-  return data;
+  
+  return vars;
 });

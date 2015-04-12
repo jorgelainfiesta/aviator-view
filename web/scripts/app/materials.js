@@ -1,3 +1,3 @@
-define(['OrbitControls', './options'], function(THREE, opts){
+define(['OrbitControls', './variables'], function(THREE, opts){
   //Materials
 });
