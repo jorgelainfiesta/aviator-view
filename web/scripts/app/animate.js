@@ -24,9 +24,10 @@ define(function(require){
     //Apply updates when needed
     if(variables.change){
       //Change sky colors
+//      scene.lights.hemisphere.color = new THREE.Color("#FFFFFF");
       scene.lights.hemisphere.color = new THREE.Color(variables.skyBottom);
       scene.sky.material.color = new THREE.Color(variables.skyTop);
-      scene.fog.color = new THREE.Color(variables.skyBottom);;
+      scene.fog.color = new THREE.Color(variables.ambientcolor);
       //Set change back to false
       variables.change = false;
     }

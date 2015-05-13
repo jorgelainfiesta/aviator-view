@@ -14,7 +14,7 @@ define(["OrbitControls", "./opts", "./variables"], function(THREE, opts, vars){
   scene.add(camera);
   
   //Set up fog
-  var fog =  new THREE.Fog( 0xd0eaff, 1, opts.far*.70);
+  var fog =  new THREE.Fog( 0xffffff, 1, opts.far*.90);
   scene.fog = fog;
 
   
@@ -23,7 +23,7 @@ define(["OrbitControls", "./opts", "./variables"], function(THREE, opts, vars){
     ambient: new THREE.AmbientLight(0x020202),
     front: new THREE.DirectionalLight('white', 0.3),
     back: new THREE.DirectionalLight('white', 0.2),
-    hemisphere: new THREE.HemisphereLight(0xE3F4FF, 0xBCE1F9, 1.001)
+   	hemisphere: new THREE.HemisphereLight(0xE3F4FF, 0xBCE1F9, 1.001)
   }
   //Add ambient
   scene.add(lights.ambient);
@@ -57,7 +57,8 @@ define(["OrbitControls", "./opts", "./variables"], function(THREE, opts, vars){
   
   //Set up the sky
   geometry = new THREE.SphereGeometry (800);
-  material = new THREE.MeshPhongMaterial({color: 0xB8EEFF} );
+//  material = new THREE.MeshPhongMaterial({color: 0xB8EEFF} );
+  material = new THREE.MeshPhongMaterial({color: 0x005d90} );
   var sky = new THREE.Mesh( geometry, material );
 	sky.material.side = THREE.DoubleSide;
   scene.add( sky );
